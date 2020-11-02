@@ -1,0 +1,55 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int M = in.nextInt();
+        int N = in.nextInt();
+        if (in.hasNextLine()) {
+            in.nextLine();
+        }
+
+        // Write an answer using System.out.println()
+        // To debug: System.err.println("Debug messages...");
+        Chemin(M,N);  // Appel de la méthode
+    }
+
+    public static int Chemin(int M, int N) //Méthode récursive pour trouver le nombre de chemin
+    {
+        Scanner in = new Scanner(System.in);
+        int nbChemin = 0;
+        String tab[][] = new String[10][10]; 
+        
+        for (int i = 0; i < M; i++) {   // Première boucle for pour initialiser la carte
+            for(int j = 0 ; j < N; j++) // dans un tableau à 2 dimensions
+            {
+                String ROW = in.nextLine();
+                tab[i][j] = ROW;
+            }
+        }
+
+        for (int l = 0; l < M; l++)       // Deuxième boucle for pour parcourir la carte
+        {
+            for (int c = 0; c < N; c++)
+            {
+                while(tab[l][c] != "1")   // Si on fait face à un mur, la boucle s'arrête 
+                {   
+                    if(l == M-1 && c == N-1) // Si on arrive au point d'arriver nbChemin augmente de 1
+                    {  
+                        nbChemin = nbChemin+1;
+                        return Chemin(M, N); // appel récursif de la méthode 
+                    }
+                }
+            }
+        }
+        return nbChemin; // On retourne le nombre de chemin 
+
+    }
+}
